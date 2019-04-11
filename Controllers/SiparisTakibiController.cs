@@ -11,7 +11,7 @@ namespace ETicaretHiSabah.Admin.Controllers
         // GET: SiparisTakibi
         public ActionResult SiparisTakibiIndex()
         {
-            /*
+            /*MUTAFF
              Bu alanda tarihe göre siparişler listelenecek. Her sipariş için bir detay buttonu olacak. Bu detay buttonunda siparişin genel bilgileri, siparişin kargo bilgileri, müşteri bilgileri,... gibi bilgiler yer alacak
              */
             return View();
