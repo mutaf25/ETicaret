@@ -1,0 +1,73 @@
+﻿@using ETicaret.BLL
+
+@{
+    ViewBag.Title = "MarkaIndex";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    MarkaManager markman = new MarkaManager();
+}
+<div class="content-wrapper">
+
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">General Elements</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <form role="form" action="/Marka/MarkaIndex" method="post" enctype="multipart/form-data">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>MARKA ADI</label>
+                    <input name="textmarkaAdi" type="text" class="form-control" placeholder="Marka adı giriniz">
+                </div>
+                <div class="label" style="width:40%;margin-left:30%;">
+                    <button class="btn btn-block btn-outline-success btn-flat">Kaydet</button>
+                </div>
+
+                <!-- textarea -->
+
+            </form>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Markalar Listesi</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table table-condensed">
+                <tr>
+                    <th style="width: 10px">ID</th>
+                    <th>Marka Adı</th>
+                    <th style="width: 10px">PersonelID</th>
+
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                </tr>
+                @foreach (var item in markman.MarkaGetir())
+                {
+                    <tr>
+                        <td>@item.MarkalarID</td>
+                        <td>@item.MarkaAdi</td>
+                        <td>@item.PersonelID</td>
+
+                        <td>
+                        @*<button class="btn btn-warning">Güncelle</button>*@
+                            @Html.ActionLink("Güncelle","MarkaGuncelle",new { Marka_ID=item.MarkalarID})
+                        </td>
+                        <td>
+                            <button class="btn btn-danger">Sil</button>
+                        </td>
+                    </tr>
+                }
+
+
+
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+</div>

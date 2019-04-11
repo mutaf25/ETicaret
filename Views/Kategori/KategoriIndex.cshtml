@@ -1,0 +1,112 @@
+﻿@using ETicaret.BLL
+
+@{
+    ViewBag.Title = "KategoriIndex";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    KategorilerManager katMan = new KategorilerManager();
+}
+
+<div class="content-wrapper">
+    <div class="col-md-12 col-lg-8 offset-lg-2">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">KATEGORİ EKLEME</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" method="post" enctype="multipart/form-data" >
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kategori Adı</label>
+                        <input type="text" name="kadi" class="form-control" id="" placeholder="Kategori Adı" autocomplete="off" required>
+                        <!--required ==> gerekli anlamına gelir. Ta gi doldurmadan işlem yapılamaz
+        autocomplete="off"==> daha önce girilen verilerin tekrar göstermesini engeller.
+        -->
+                    </div>
+                    <!--***************************************************-->
+                    <!--***************************************************-->
+                    <!--Üst kategori listeleme-->
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Üst Kategori</label>
+                        <select class="form-control" name="PKatID" data-placeholder="Seçiniz">
+                            <option value="" disabled selected hidden  >Seçiniz</option>
+                            @foreach (var item in ViewBag.UstKategori)
+                            {
+                                <option value="@item.KategorilerID">@item.KategoriAdi</option>
+                            }
+                        </select>
+                    </div>
+                    <!--***************************************************-->
+                    <!--***************************************************-->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">KATEGORİ EKLE</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+
+
+    </div>
+
+    <!--***********************************************************-->
+
+
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Kategori Listesi</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Kategori Adı</th>
+                                    <th>ParentID</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in katMan.KategoriGetir())
+                                {
+                                    <tr>
+                                        <td>@item.KategorilerID</td>
+                                        <td>@item.KategoriAdi
+                                        </td>
+                                        <td>@item.ParentKategoriID</td>
+                                        <td>
+                                            @*<input class="btn btn-warning" type="submit" name="name" value="GÜNCELLE" />*@
+                                            @Html.ActionLink("Güncelle", "KategoriGuncelle", new { Kategori_Id = item.KategorilerID },new {@class="btn btn-warning" })
+                                       |
+                                            @Html.ActionLink("Sil", "KategoriSil", new { kategorilerSil_Id = item.KategorilerID }, new { @class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Rendering engine</th>
+                                    <th>Browser</th>
+                                    <th>Platform(s)</th>
+                                    <th>Engine version</th>
+                                    <th>CSS grade</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+               
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</div>

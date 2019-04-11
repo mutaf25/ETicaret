@@ -1,0 +1,91 @@
+﻿@model ETicaret.DLL.Kategoriler
+    @using  ETicaret.BLL
+
+@{
+    ViewBag.Title = "KategoriGuncelle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    KategorilerManager kategoriMan = new KategorilerManager();
+}
+
+<div class="content-wrapper">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Kategoriler</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.KategorilerID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.KategoriAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.KategoriAdi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.KategoriAdi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ParentKategoriID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <!--****************************************************-->
+                    @*@Html.DropDownList("UstKategori", null, new { @class = "form-control" })*@
+                    <!--****************************************************-->
+                    @*@Html.DropDownList("ParentKategoriID1",null, new { @class = "form-control" })*@
+                    @*@Html.DropDownList("ParentKategoriID",(IEnumerable<SelectListItem>)ViewBag.ParentKategoriID, new { @class = "form-control" })*@
+                    <!--Html.DropDownListFor(m=>m.ParentKategoriID,null, new { class = "form-control" })
+                        -->
+                    @*@Html.EditorFor(model => model.ParentKategoriID, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @*@Html.EditorFor(model => model.ParentKategoriID, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <!--****************************************************-->
+                    <!--****************************************************-->
+
+                    <select class="form-control" name="ParentKategoriID">
+                        @*<option value="">Seçiniz</option>*@
+
+                        @if (kategoriMan.ParentKategoriGetir(Model.KategorilerID) != 0)
+                        {
+                            <!--ParenkId değerini getiri-->
+                            @*<option value="">@Model.ParentKategoriID</option>*@
+                            <!--ParentId değerine göre Kategori ismin getirir-->
+                            <option value="">@kategoriMan.KategoriBul((int)Model.ParentKategoriID).KategoriAdi</option>
+                        }
+                        else
+                        {
+                            @*<option value="">Seçiniz</option>*@
+                            <option value="" disabled selected hidden="hidden" >Ana Kategori</option>
+                        }
+                        @foreach (var item in ViewBag.UstKategori)
+                        {
+                            <option value="@item.KategorilerID">@item.KategoriAdi</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PersonelID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PersonelID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PersonelID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="GÜNCELLE" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <!--Html.Raw ile değişkenini içinde html kodları varsa onları çalıştırır(br,hr gibi)-->
+        @Html.Raw(TempData["KategoriGuncelle"])
+    }
+
+    <div>
+        <span class="glyphicon glyphicon"  ></span>
+        @Html.ActionLink("Kategori Listesine Git", "KategoriIndex")
+    </div>
+
+</div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ETicaret.DLL.indirimTurleri>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="content-wrapper container-fluid">
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("İndirim Türleri Ekle", "IndirimTurleriKaydetIndex")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.indirimTuruAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.indirimTuruAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aciklama)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "IndirimTurleriGuncelleIndex", new { ID=item.indirimTurleriID },new {@class="btn btn-success" }) |
+            @*@Html.ActionLink("Det", "Details", new { id=item.indirimTurleriID })*@ 
+            @Html.ActionLink("Sil", "Delete", new { id=item.indirimTurleriID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+</div>

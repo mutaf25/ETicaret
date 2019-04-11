@@ -1,0 +1,158 @@
+﻿@model IEnumerable<ETicaret.DLL.Personeller>
+
+@{
+    ViewBag.Title = "PersonelListeIndex";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="content-wrapper">
+
+
+
+        <p>
+            @Html.ActionLink("Create New", "PersonelEkleIndex", null, new { @class = "btn btn-primary" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TC)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Adi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Soyadi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EMail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefon)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DogumTarihi)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Cinsiyet)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.MedeniHali)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Unvan)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.KayitTarihi)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Adres)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.KAdi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KSifre)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.PersonelRolleri.RolAdi)
+                    </th>*@
+                <th>işlemler</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Soyadi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefon)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.DogumTarihi)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cinsiyet)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.MedeniHali)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Unvan)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.KayitTarihi)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adres)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.KAdi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KSifre)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.PersonelRolleri.RolAdi)
+                        </td>*@
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PersonellerID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PersonellerID }) |
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.PersonellerID })*@
+                        <a href="#" class="btn persSil" data-xpersonelid="@item.PersonellerID">SİL</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script src="~/AdminTemp/plugins/jquery/jquery.min.js"></script>
+    <script>
+
+    $(".persSil").click(function(){
+    var personelSil=confirm("Personel silmeyi onaylıyor musunuz???");
+    if(personelSil){
+    //alert("++++");
+        var tutulanpersonel=$(this).data("xpersonelid");
+
+        $.ajax({
+                type:"post",
+                data:{gelenpers_id:tutulanpersonel},
+                url:"/Personeller/PersonelSil",
+                success:function(){
+                alert("Personel başarılı bir şekilde silindi");
+                window.location.replace("/Personeller/PersonelListeIndex")
+                },
+                error:function(){
+                alert("Silme başarısız");
+                }
+        });
+    }
+    else{
+    alert("Personel silme işlemini iptal ettiniz");
+
+    }
+
+
+
+    });
+
+    </script>
+
+
+}

@@ -1,0 +1,49 @@
+﻿@model ETicaret.DLL.Markalar
+
+@{
+    ViewBag.Title = "MarkaGuncelle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="content-wrapper">
+    <h2>MarkaGuncelle</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Markalar</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MarkalarID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MarkaAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MarkaAdi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MarkaAdi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.PersonelID, "PersonelID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model=>model.PersonelID,new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PersonelID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="MARKA GÜNCELLE" class="btn btn-warning" />
+                </div>
+            </div>
+        </div>
+    }
+
+        <div>
+            @Html.ActionLink("Markalara Git", "MarkaIndex")
+           @Html.Raw(TempData["GuncelleMesaji"])
+            <!--Html.Raw Controller tarafından gönderilen TempData yapısının içinde  html kodları varsa onu çalıştıracaktır-->
+        </div>
+    </div>
