@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a9e125a832240d7a0a2b27c9cd9d29d" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="ETicaretDBModel.Bankalar" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.BegenilenUrunler" Width="1.5" PointX="9.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Duyurular" Width="1.5" PointX="10.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Faturalar" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.indirimTurleri" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Kampanyalar" Width="1.5" PointX="8.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.KargoFirmalari" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Kargolar" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Markalar" Width="1.5" PointX="5.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.OlcuBirimleri" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Personeller" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.PersonelRolleri" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Reklamlar" Width="1.5" PointX="5.25" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Sepet" Width="1.5" PointX="7.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.SepetDetay" Width="1.5" PointX="9.75" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.SiparisDetaylari" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Siparisler" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.UrunDuyurulari" Width="1.5" PointX="12.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Urunler" Width="1.5" PointX="7.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.UrunOzellikleri" Width="1.5" PointX="9.75" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.UyeAdresleri" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Uyeler" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Yorumlar" Width="1.5" PointX="12.75" PointY="26.25" IsExpanded="true" />
+        <AssociationConnector Association="ETicaretDBModel.FK_BegenilenUrunler_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_BegenilenUrunler_Uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UrunDuyurulari_Duyurular" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Faturalar_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Faturalar_Siparisler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Faturalar_UyeAdresleri" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Faturalar_Uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Kampanyalar_indirimTurleri" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Kampanyalar_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_SiparisDetaylari_Kampanyalar" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Kargolar_KargoFirmalari" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Siparisler_Kargolar1" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Markalar_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Urunler_Markalar" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Personeller_PersonelRolleri" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Reklamlar_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Siparisler_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Urunler_Personeller" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_SepetDetay_Sepet" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_SepetDetay_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_SiparisDetaylari_Siparisler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_SiparisDetaylari_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Siparisler_Uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UrunDuyurulari_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UrunOzellikleri_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Yorumlar_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UyeAdresleri_Uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Yorumlar_Uyeler" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ETicaretDBModel.Kategoriler" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="ETicaretDBModel.FK_Urunler_Kategoriler" />
+        <EntityTypeShape EntityType="ETicaretDBModel.UrunResimleri" Width="1.5" PointX="12.75" PointY="18.875" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UrunResimleri_Personeller" />
+        <AssociationConnector Association="ETicaretDBModel.FK_UrunResimleri_Urunler" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

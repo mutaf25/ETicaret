@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ETicaretDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bankalar">
+    <Key>
+      <PropertyRef Name="BankalarID" />
+    </Key>
+    <Property Name="BankalarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BegenilenUrunler">
+    <Key>
+      <PropertyRef Name="BegenilenUrunlerID" />
+    </Key>
+    <Property Name="BegenilenUrunlerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_BegenilenUrunler_Urunler" FromRole="BegenilenUrunler" ToRole="Urunler" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_BegenilenUrunler_Uyeler" FromRole="BegenilenUrunler" ToRole="Uyeler" />
+  </EntityType>
+  <EntityType Name="Duyurular">
+    <Key>
+      <PropertyRef Name="DuyurularID" />
+    </Key>
+    <Property Name="DuyurularID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BaslangicTarihi" Type="DateTime" Precision="0" />
+    <Property Name="BitisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="DuyuruBasligi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Duyuru" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UrunDuyurulari" Relationship="Self.FK_UrunDuyurulari_Duyurular" FromRole="Duyurular" ToRole="UrunDuyurulari" />
+  </EntityType>
+  <EntityType Name="Faturalar">
+    <Key>
+      <PropertyRef Name="FaturalarID" />
+    </Key>
+    <Property Name="FaturalarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="SiparisID" Type="Int32" />
+    <Property Name="AdresID" Type="Int32" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Faturalar_Personeller" FromRole="Faturalar" ToRole="Personeller" />
+    <NavigationProperty Name="Siparisler" Relationship="Self.FK_Faturalar_Siparisler" FromRole="Faturalar" ToRole="Siparisler" />
+    <NavigationProperty Name="UyeAdresleri" Relationship="Self.FK_Faturalar_UyeAdresleri" FromRole="Faturalar" ToRole="UyeAdresleri" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_Faturalar_Uyeler" FromRole="Faturalar" ToRole="Uyeler" />
+  </EntityType>
+  <EntityType Name="indirimTurleri">
+    <Key>
+      <PropertyRef Name="indirimTurleriID" />
+    </Key>
+    <Property Name="indirimTurleriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="indirimTuruAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kampanyalar" Relationship="Self.FK_Kampanyalar_indirimTurleri" FromRole="indirimTurleri" ToRole="Kampanyalar" />
+  </EntityType>
+  <EntityType Name="Kampanyalar">
+    <Key>
+      <PropertyRef Name="KampanyalarID" />
+    </Key>
+    <Property Name="KampanyalarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="indirimTuruID" Type="Int32" />
+    <Property Name="Tutar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="KampanyaBasligi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="KampanyaAciklamasi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BaslamaTarihi" Type="DateTime" Precision="0" />
+    <Property Name="BitisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="indirimTurleri" Relationship="Self.FK_Kampanyalar_indirimTurleri" FromRole="Kampanyalar" ToRole="indirimTurleri" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Kampanyalar_Personeller" FromRole="Kampanyalar" ToRole="Personeller" />
+    <NavigationProperty Name="SiparisDetaylari" Relationship="Self.FK_SiparisDetaylari_Kampanyalar" FromRole="Kampanyalar" ToRole="SiparisDetaylari" />
+  </EntityType>
+  <EntityType Name="KargoFirmalari">
+    <Key>
+      <PropertyRef Name="KargoFirmalariID" />
+    </Key>
+    <Property Name="KargoFirmalariID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KargoAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AnlasmaTarihi" Type="DateTime" Precision="0" />
+    <Property Name="AnlasmaBitisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kargolar" Relationship="Self.FK_Kargolar_KargoFirmalari" FromRole="KargoFirmalari" ToRole="Kargolar" />
+  </EntityType>
+  <EntityType Name="Kargolar">
+    <Key>
+      <PropertyRef Name="KargolarID" />
+    </Key>
+    <Property Name="KargolarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KargoFirmaID" Type="Int32" />
+    <Property Name="VerilisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="KargoUcreti" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="KargoTeslimTarihi" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="KargoFirmalari" Relationship="Self.FK_Kargolar_KargoFirmalari" FromRole="Kargolar" ToRole="KargoFirmalari" />
+    <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Kargolar1" FromRole="Kargolar" ToRole="Siparisler" />
+  </EntityType>
+  <EntityType Name="Markalar">
+    <Key>
+      <PropertyRef Name="MarkalarID" />
+    </Key>
+    <Property Name="MarkalarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MarkaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Markalar_Personeller" FromRole="Markalar" ToRole="Personeller" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Markalar" FromRole="Markalar" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="OlcuBirimleri">
+    <Key>
+      <PropertyRef Name="OlcuBirimleriID" />
+    </Key>
+    <Property Name="OlcuBirimleriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OlcuBirimiAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Personeller">
+    <Key>
+      <PropertyRef Name="PersonellerID" />
+    </Key>
+    <Property Name="PersonellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TC" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MedeniHali" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Unvan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KayitTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RolID" Type="Int32" />
+    <NavigationProperty Name="Faturalar" Relationship="Self.FK_Faturalar_Personeller" FromRole="Personeller" ToRole="Faturalar" />
+    <NavigationProperty Name="Kampanyalar" Relationship="Self.FK_Kampanyalar_Personeller" FromRole="Personeller" ToRole="Kampanyalar" />
+    <NavigationProperty Name="Markalar" Relationship="Self.FK_Markalar_Personeller" FromRole="Personeller" ToRole="Markalar" />
+    <NavigationProperty Name="PersonelRolleri" Relationship="Self.FK_Personeller_PersonelRolleri" FromRole="Personeller" ToRole="PersonelRolleri" />
+    <NavigationProperty Name="Reklamlar" Relationship="Self.FK_Reklamlar_Personeller" FromRole="Personeller" ToRole="Reklamlar" />
+    <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Personeller" FromRole="Personeller" ToRole="Siparisler" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Personeller" FromRole="Personeller" ToRole="Urunler" />
+    <NavigationProperty Name="UrunResimleri" Relationship="ETicaretDBModel.FK_UrunResimleri_Personeller" FromRole="Personeller" ToRole="UrunResimleri" />
+  </EntityType>
+  <EntityType Name="PersonelRolleri">
+    <Key>
+      <PropertyRef Name="PersonelRolleriID" />
+    </Key>
+    <Property Name="PersonelRolleriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Personeller_PersonelRolleri" FromRole="PersonelRolleri" ToRole="Personeller" />
+  </EntityType>
+  <EntityType Name="Reklamlar">
+    <Key>
+      <PropertyRef Name="ReklamlarID" />
+    </Key>
+    <Property Name="ReklamlarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReklamAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ReklamKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Durum" Type="Boolean" />
+    <Property Name="Yer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Reklamlar_Personeller" FromRole="Reklamlar" ToRole="Personeller" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="SepetlerID" />
+    </Key>
+    <Property Name="SepetlerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="Tarihi" Type="DateTime" Precision="0" />
+    <Property Name="ToplamAdet" Type="Int32" />
+    <Property Name="ToplamTutar" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="SepetDetay" Relationship="Self.FK_SepetDetay_Sepet" FromRole="Sepet" ToRole="SepetDetay" />
+  </EntityType>
+  <EntityType Name="SepetDetay">
+    <Key>
+      <PropertyRef Name="SepetDetaylarID" />
+    </Key>
+    <Property Name="SepetDetaylarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="UrunAdet" Type="Int32" />
+    <Property Name="UrunFiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SepetID" Type="Int32" />
+    <NavigationProperty Name="Sepet" Relationship="Self.FK_SepetDetay_Sepet" FromRole="SepetDetay" ToRole="Sepet" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_SepetDetay_Urunler" FromRole="SepetDetay" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="SiparisDetaylari">
+    <Key>
+      <PropertyRef Name="SiparisDetaylariID" />
+    </Key>
+    <Property Name="SiparisDetaylariID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiparisID" Type="Int32" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="SiparisFiyati" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Miktar" Type="Int32" />
+    <Property Name="KampanyaID" Type="Int32" />
+    <NavigationProperty Name="Kampanyalar" Relationship="Self.FK_SiparisDetaylari_Kampanyalar" FromRole="SiparisDetaylari" ToRole="Kampanyalar" />
+    <NavigationProperty Name="Siparisler" Relationship="Self.FK_SiparisDetaylari_Siparisler" FromRole="SiparisDetaylari" ToRole="Siparisler" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_SiparisDetaylari_Urunler" FromRole="SiparisDetaylari" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="Siparisler">
+    <Key>
+      <PropertyRef Name="SiparislerID" />
+    </Key>
+    <Property Name="SiparislerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="PersonelID" Type="Int32" />
+    <Property Name="Tarihi" Type="DateTime" Precision="0" />
+    <Property Name="KargoID" Type="Int32" />
+    <Property Name="ToplamFiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SiparisAdet" Type="Int32" />
+    <NavigationProperty Name="Faturalar" Relationship="Self.FK_Faturalar_Siparisler" FromRole="Siparisler" ToRole="Faturalar" />
+    <NavigationProperty Name="Kargolar" Relationship="Self.FK_Siparisler_Kargolar1" FromRole="Siparisler" ToRole="Kargolar" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Siparisler_Personeller" FromRole="Siparisler" ToRole="Personeller" />
+    <NavigationProperty Name="SiparisDetaylari" Relationship="Self.FK_SiparisDetaylari_Siparisler" FromRole="Siparisler" ToRole="SiparisDetaylari" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_Siparisler_Uyeler" FromRole="Siparisler" ToRole="Uyeler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UrunDuyurulari">
+    <Key>
+      <PropertyRef Name="UrunDuyurularID" />
+    </Key>
+    <Property Name="UrunDuyurularID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DuyuruID" Type="Int32" />
+    <Property Name="UrunID" Type="Int32" />
+    <NavigationProperty Name="Duyurular" Relationship="Self.FK_UrunDuyurulari_Duyurular" FromRole="UrunDuyurulari" ToRole="Duyurular" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_UrunDuyurulari_Urunler" FromRole="UrunDuyurulari" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="UrunlerID" />
+    </Key>
+    <Property Name="UrunlerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriID" Type="Int32" />
+    <Property Name="MarkaID" Type="Int32" />
+    <Property Name="UrunAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UrunFiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UrunOlcuTanimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UrunStok" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UrunAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="BegenilenUrunler" Relationship="Self.FK_BegenilenUrunler_Urunler" FromRole="Urunler" ToRole="BegenilenUrunler" />
+    <NavigationProperty Name="Markalar" Relationship="Self.FK_Urunler_Markalar" FromRole="Urunler" ToRole="Markalar" />
+    <NavigationProperty Name="Personeller" Relationship="Self.FK_Urunler_Personeller" FromRole="Urunler" ToRole="Personeller" />
+    <NavigationProperty Name="SepetDetay" Relationship="Self.FK_SepetDetay_Urunler" FromRole="Urunler" ToRole="SepetDetay" />
+    <NavigationProperty Name="SiparisDetaylari" Relationship="Self.FK_SiparisDetaylari_Urunler" FromRole="Urunler" ToRole="SiparisDetaylari" />
+    <NavigationProperty Name="UrunDuyurulari" Relationship="Self.FK_UrunDuyurulari_Urunler" FromRole="Urunler" ToRole="UrunDuyurulari" />
+    <NavigationProperty Name="UrunOzellikleri" Relationship="Self.FK_UrunOzellikleri_Urunler" FromRole="Urunler" ToRole="UrunOzellikleri" />
+    <NavigationProperty Name="Yorumlar" Relationship="Self.FK_Yorumlar_Urunler" FromRole="Urunler" ToRole="Yorumlar" />
+    <NavigationProperty Name="Kategoriler" Relationship="ETicaretDBModel.FK_Urunler_Kategoriler" FromRole="Urunler" ToRole="Kategoriler" />
+    <NavigationProperty Name="UrunResimleri" Relationship="ETicaretDBModel.FK_UrunResimleri_Urunler" FromRole="Urunler" ToRole="UrunResimleri" />
+  </EntityType>
+  <EntityType Name="UrunOzellikleri">
+    <Key>
+      <PropertyRef Name="UrunOzelliklerID" />
+    </Key>
+    <Property Name="UrunOzelliklerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="OzellikTanimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OlcuBirimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirimStok" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="KalanStok" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_UrunOzellikleri_Urunler" FromRole="UrunOzellikleri" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="UyeAdresleri">
+    <Key>
+      <PropertyRef Name="UyeAdresleriID" />
+    </Key>
+    <Property Name="UyeAdresleriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdresYeri" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ili" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ilcesi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UyeID" Type="Int32" />
+    <NavigationProperty Name="Faturalar" Relationship="Self.FK_Faturalar_UyeAdresleri" FromRole="UyeAdresleri" ToRole="Faturalar" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_UyeAdresleri_Uyeler" FromRole="UyeAdresleri" ToRole="Uyeler" />
+  </EntityType>
+  <EntityType Name="Uyeler">
+    <Key>
+      <PropertyRef Name="UyelerID" />
+    </Key>
+    <Property Name="UyelerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UyeSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KayitTarihi" Type="DateTime" Precision="0" />
+    <Property Name="EMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MedeniHali" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Meslek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KullaniciSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BegenilenUrunler" Relationship="Self.FK_BegenilenUrunler_Uyeler" FromRole="Uyeler" ToRole="BegenilenUrunler" />
+    <NavigationProperty Name="Faturalar" Relationship="Self.FK_Faturalar_Uyeler" FromRole="Uyeler" ToRole="Faturalar" />
+    <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Uyeler" FromRole="Uyeler" ToRole="Siparisler" />
+    <NavigationProperty Name="UyeAdresleri" Relationship="Self.FK_UyeAdresleri_Uyeler" FromRole="Uyeler" ToRole="UyeAdresleri" />
+    <NavigationProperty Name="Yorumlar" Relationship="Self.FK_Yorumlar_Uyeler" FromRole="Uyeler" ToRole="Yorumlar" />
+  </EntityType>
+  <EntityType Name="Yorumlar">
+    <Key>
+      <PropertyRef Name="YorumlarID" />
+    </Key>
+    <Property Name="YorumlarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeID" Type="Int32" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="YorumBasligi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="YorumMetni" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Star" Type="Int32" />
+    <Property Name="Tarihi" Type="DateTime" Precision="0" />
+    <Property Name="BegenmeSayisi" Type="Int32" />
+    <Property Name="BegenmemeSayisi" Type="Int32" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_Yorumlar_Urunler" FromRole="Yorumlar" ToRole="Urunler" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_Yorumlar_Uyeler" FromRole="Yorumlar" ToRole="Uyeler" />
+    <Property Name="OnayDurumu" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_BegenilenUrunler_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="BegenilenUrunler" Type="Self.BegenilenUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="BegenilenUrunler">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BegenilenUrunler_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="BegenilenUrunler" Type="Self.BegenilenUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="UyelerID" />
+      </Principal>
+      <Dependent Role="BegenilenUrunler">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunDuyurulari_Duyurular">
+    <End Role="Duyurular" Type="Self.Duyurular" Multiplicity="0..1" />
+    <End Role="UrunDuyurulari" Type="Self.UrunDuyurulari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Duyurular">
+        <PropertyRef Name="DuyurularID" />
+      </Principal>
+      <Dependent Role="UrunDuyurulari">
+        <PropertyRef Name="DuyuruID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faturalar_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Faturalar" Type="Self.Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Faturalar">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faturalar_Siparisler">
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+    <End Role="Faturalar" Type="Self.Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Siparisler">
+        <PropertyRef Name="SiparislerID" />
+      </Principal>
+      <Dependent Role="Faturalar">
+        <PropertyRef Name="SiparisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faturalar_UyeAdresleri">
+    <End Role="UyeAdresleri" Type="Self.UyeAdresleri" Multiplicity="0..1" />
+    <End Role="Faturalar" Type="Self.Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UyeAdresleri">
+        <PropertyRef Name="UyeAdresleriID" />
+      </Principal>
+      <Dependent Role="Faturalar">
+        <PropertyRef Name="AdresID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faturalar_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="Faturalar" Type="Self.Faturalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="UyelerID" />
+      </Principal>
+      <Dependent Role="Faturalar">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kampanyalar_indirimTurleri">
+    <End Role="indirimTurleri" Type="Self.indirimTurleri" Multiplicity="0..1" />
+    <End Role="Kampanyalar" Type="Self.Kampanyalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="indirimTurleri">
+        <PropertyRef Name="indirimTurleriID" />
+      </Principal>
+      <Dependent Role="Kampanyalar">
+        <PropertyRef Name="indirimTuruID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kampanyalar_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Kampanyalar" Type="Self.Kampanyalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Kampanyalar">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetaylari_Kampanyalar">
+    <End Role="Kampanyalar" Type="Self.Kampanyalar" Multiplicity="0..1" />
+    <End Role="SiparisDetaylari" Type="Self.SiparisDetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kampanyalar">
+        <PropertyRef Name="KampanyalarID" />
+      </Principal>
+      <Dependent Role="SiparisDetaylari">
+        <PropertyRef Name="KampanyaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kargolar_KargoFirmalari">
+    <End Role="KargoFirmalari" Type="Self.KargoFirmalari" Multiplicity="0..1" />
+    <End Role="Kargolar" Type="Self.Kargolar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KargoFirmalari">
+        <PropertyRef Name="KargoFirmalariID" />
+      </Principal>
+      <Dependent Role="Kargolar">
+        <PropertyRef Name="KargoFirmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Kargolar1">
+    <End Role="Kargolar" Type="Self.Kargolar" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kargolar">
+        <PropertyRef Name="KargolarID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="KargoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Markalar_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Markalar" Type="Self.Markalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Markalar">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urunler_Markalar">
+    <End Role="Markalar" Type="Self.Markalar" Multiplicity="0..1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Markalar">
+        <PropertyRef Name="MarkalarID" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="MarkaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personeller_PersonelRolleri">
+    <End Role="PersonelRolleri" Type="Self.PersonelRolleri" Multiplicity="0..1" />
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonelRolleri">
+        <PropertyRef Name="PersonelRolleriID" />
+      </Principal>
+      <Dependent Role="Personeller">
+        <PropertyRef Name="RolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reklamlar_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Reklamlar" Type="Self.Reklamlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Reklamlar">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urunler_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SepetDetay_Sepet">
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="0..1" />
+    <End Role="SepetDetay" Type="Self.SepetDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sepet">
+        <PropertyRef Name="SepetlerID" />
+      </Principal>
+      <Dependent Role="SepetDetay">
+        <PropertyRef Name="SepetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SepetDetay_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="SepetDetay" Type="Self.SepetDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="SepetDetay">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetaylari_Siparisler">
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+    <End Role="SiparisDetaylari" Type="Self.SiparisDetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Siparisler">
+        <PropertyRef Name="SiparislerID" />
+      </Principal>
+      <Dependent Role="SiparisDetaylari">
+        <PropertyRef Name="SiparisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetaylari_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="SiparisDetaylari" Type="Self.SiparisDetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="SiparisDetaylari">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="UyelerID" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunDuyurulari_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="UrunDuyurulari" Type="Self.UrunDuyurulari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="UrunDuyurulari">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunOzellikleri_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="UrunOzellikleri" Type="Self.UrunOzellikleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="UrunOzellikleri">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorumlar_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="Yorumlar">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UyeAdresleri_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="UyeAdresleri" Type="Self.UyeAdresleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="UyelerID" />
+      </Principal>
+      <Dependent Role="UyeAdresleri">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorumlar_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="UyelerID" />
+      </Principal>
+      <Dependent Role="Yorumlar">
+        <PropertyRef Name="UyeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ETicaretDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bankalar" EntityType="Self.Bankalar" />
+    <EntitySet Name="BegenilenUrunler" EntityType="Self.BegenilenUrunler" />
+    <EntitySet Name="Duyurular" EntityType="Self.Duyurular" />
+    <EntitySet Name="Faturalar" EntityType="Self.Faturalar" />
+    <EntitySet Name="indirimTurleri" EntityType="Self.indirimTurleri" />
+    <EntitySet Name="Kampanyalar" EntityType="Self.Kampanyalar" />
+    <EntitySet Name="KargoFirmalari" EntityType="Self.KargoFirmalari" />
+    <EntitySet Name="Kargolar" EntityType="Self.Kargolar" />
+    <EntitySet Name="Markalar" EntityType="Self.Markalar" />
+    <EntitySet Name="OlcuBirimleri" EntityType="Self.OlcuBirimleri" />
+    <EntitySet Name="Personeller" EntityType="Self.Personeller" />
+    <EntitySet Name="PersonelRolleri" EntityType="Self.PersonelRolleri" />
+    <EntitySet Name="Reklamlar" EntityType="Self.Reklamlar" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" />
+    <EntitySet Name="SepetDetay" EntityType="Self.SepetDetay" />
+    <EntitySet Name="SiparisDetaylari" EntityType="Self.SiparisDetaylari" />
+    <EntitySet Name="Siparisler" EntityType="Self.Siparisler" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="UrunDuyurulari" EntityType="Self.UrunDuyurulari" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+    <EntitySet Name="UrunOzellikleri" EntityType="Self.UrunOzellikleri" />
+    <EntitySet Name="UyeAdresleri" EntityType="Self.UyeAdresleri" />
+    <EntitySet Name="Uyeler" EntityType="Self.Uyeler" />
+    <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" />
+    <AssociationSet Name="FK_BegenilenUrunler_Urunler" Association="Self.FK_BegenilenUrunler_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="BegenilenUrunler" EntitySet="BegenilenUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BegenilenUrunler_Uyeler" Association="Self.FK_BegenilenUrunler_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="BegenilenUrunler" EntitySet="BegenilenUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunDuyurulari_Duyurular" Association="Self.FK_UrunDuyurulari_Duyurular">
+      <End Role="Duyurular" EntitySet="Duyurular" />
+      <End Role="UrunDuyurulari" EntitySet="UrunDuyurulari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faturalar_Personeller" Association="Self.FK_Faturalar_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Faturalar" EntitySet="Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faturalar_Siparisler" Association="Self.FK_Faturalar_Siparisler">
+      <End Role="Siparisler" EntitySet="Siparisler" />
+      <End Role="Faturalar" EntitySet="Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faturalar_UyeAdresleri" Association="Self.FK_Faturalar_UyeAdresleri">
+      <End Role="UyeAdresleri" EntitySet="UyeAdresleri" />
+      <End Role="Faturalar" EntitySet="Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faturalar_Uyeler" Association="Self.FK_Faturalar_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="Faturalar" EntitySet="Faturalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kampanyalar_indirimTurleri" Association="Self.FK_Kampanyalar_indirimTurleri">
+      <End Role="indirimTurleri" EntitySet="indirimTurleri" />
+      <End Role="Kampanyalar" EntitySet="Kampanyalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kampanyalar_Personeller" Association="Self.FK_Kampanyalar_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Kampanyalar" EntitySet="Kampanyalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetaylari_Kampanyalar" Association="Self.FK_SiparisDetaylari_Kampanyalar">
+      <End Role="Kampanyalar" EntitySet="Kampanyalar" />
+      <End Role="SiparisDetaylari" EntitySet="SiparisDetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kargolar_KargoFirmalari" Association="Self.FK_Kargolar_KargoFirmalari">
+      <End Role="KargoFirmalari" EntitySet="KargoFirmalari" />
+      <End Role="Kargolar" EntitySet="Kargolar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Kargolar1" Association="Self.FK_Siparisler_Kargolar1">
+      <End Role="Kargolar" EntitySet="Kargolar" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Markalar_Personeller" Association="Self.FK_Markalar_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Markalar" EntitySet="Markalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urunler_Markalar" Association="Self.FK_Urunler_Markalar">
+      <End Role="Markalar" EntitySet="Markalar" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personeller_PersonelRolleri" Association="Self.FK_Personeller_PersonelRolleri">
+      <End Role="PersonelRolleri" EntitySet="PersonelRolleri" />
+      <End Role="Personeller" EntitySet="Personeller" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reklamlar_Personeller" Association="Self.FK_Reklamlar_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Reklamlar" EntitySet="Reklamlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Personeller" Association="Self.FK_Siparisler_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urunler_Personeller" Association="Self.FK_Urunler_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SepetDetay_Sepet" Association="Self.FK_SepetDetay_Sepet">
+      <End Role="Sepet" EntitySet="Sepet" />
+      <End Role="SepetDetay" EntitySet="SepetDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SepetDetay_Urunler" Association="Self.FK_SepetDetay_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="SepetDetay" EntitySet="SepetDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetaylari_Siparisler" Association="Self.FK_SiparisDetaylari_Siparisler">
+      <End Role="Siparisler" EntitySet="Siparisler" />
+      <End Role="SiparisDetaylari" EntitySet="SiparisDetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetaylari_Urunler" Association="Self.FK_SiparisDetaylari_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="SiparisDetaylari" EntitySet="SiparisDetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Uyeler" Association="Self.FK_Siparisler_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunDuyurulari_Urunler" Association="Self.FK_UrunDuyurulari_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="UrunDuyurulari" EntitySet="UrunDuyurulari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunOzellikleri_Urunler" Association="Self.FK_UrunOzellikleri_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="UrunOzellikleri" EntitySet="UrunOzellikleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorumlar_Urunler" Association="Self.FK_Yorumlar_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Yorumlar" EntitySet="Yorumlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UyeAdresleri_Uyeler" Association="Self.FK_UyeAdresleri_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="UyeAdresleri" EntitySet="UyeAdresleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorumlar_Uyeler" Association="Self.FK_Yorumlar_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="Yorumlar" EntitySet="Yorumlar" />
+    </AssociationSet>
+    <EntitySet Name="Kategoriler" EntityType="ETicaretDBModel.Kategoriler" />
+    <AssociationSet Name="FK_Urunler_Kategoriler" Association="ETicaretDBModel.FK_Urunler_Kategoriler">
+      <End Role="Kategoriler" EntitySet="Kategoriler" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+    <EntitySet Name="UrunResimleri" EntityType="ETicaretDBModel.UrunResimleri" />
+    <AssociationSet Name="FK_UrunResimleri_Personeller" Association="ETicaretDBModel.FK_UrunResimleri_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="UrunResimleri" EntitySet="UrunResimleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunResimleri_Urunler" Association="ETicaretDBModel.FK_UrunResimleri_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="UrunResimleri" EntitySet="UrunResimleri" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="KategorilerID" />
+    </Key>
+    <Property Name="KategorilerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentKategoriID" Type="Int32" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="Urunler" Relationship="ETicaretDBModel.FK_Urunler_Kategoriler" FromRole="Kategoriler" ToRole="Urunler" />
+  </EntityType>
+  <Association Name="FK_Urunler_Kategoriler">
+    <End Type="ETicaretDBModel.Kategoriler" Role="Kategoriler" Multiplicity="0..1" />
+    <End Type="ETicaretDBModel.Urunler" Role="Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategoriler">
+        <PropertyRef Name="KategorilerID" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UrunResimleri">
+    <Key>
+      <PropertyRef Name="UrunResimleriID" />
+    </Key>
+    <Property Name="UrunResimleriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunID" Type="Int32" />
+    <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PersonelID" Type="Int32" />
+    <NavigationProperty Name="Personeller" Relationship="ETicaretDBModel.FK_UrunResimleri_Personeller" FromRole="UrunResimleri" ToRole="Personeller" />
+    <NavigationProperty Name="Urunler" Relationship="ETicaretDBModel.FK_UrunResimleri_Urunler" FromRole="UrunResimleri" ToRole="Urunler" />
+  </EntityType>
+  <Association Name="FK_UrunResimleri_Personeller">
+    <End Type="ETicaretDBModel.Personeller" Role="Personeller" Multiplicity="0..1" />
+    <End Type="ETicaretDBModel.UrunResimleri" Role="UrunResimleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="PersonellerID" />
+      </Principal>
+      <Dependent Role="UrunResimleri">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunResimleri_Urunler">
+    <End Type="ETicaretDBModel.Urunler" Role="Urunler" Multiplicity="0..1" />
+    <End Type="ETicaretDBModel.UrunResimleri" Role="UrunResimleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="UrunlerID" />
+      </Principal>
+      <Dependent Role="UrunResimleri">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
