@@ -14,6 +14,8 @@ namespace ETicaret.BLL
 
         public List<OlcuBirimleri> OlcuBirimleriGetir()
         {
+           //bu alanda 190411 tarihinde sınıft değişiklik yapılmıştır
+           //db.OlcuBirimleri.Tolist();
             return repOlc.Liste();
         }
 
